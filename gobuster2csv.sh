@@ -71,15 +71,16 @@ RANDOM_NUMBER=$(date +%s%D${RANDOM}${RANDOM} | base64 | head -n 10 )
 TMP_DIR="/tmp/${RANDOM_NUMBER}"
 touch ${TMP_DIR}
 
-# genrate random number for results
-RESULTS="results-${RANDOM}.csv"
-echo "[+] Output file: ${RESULTS}"
-
-# create csv file header
-printf '%s\n' "URL" "Status Code" | paste -sd ',' > ${RESULTS}
 
 if [[ "${SET_WORDLIST}" = 'true' ]]
 then
+	# generate random number for results
+	RESULTS="results-${RANDOM}.csv"
+	echo "[+] Output file: ${RESULTS}"
+
+	# create csv file header
+	printf '%s\n' "URL" "Status Code" | paste -sd ',' > ${RESULTS}
+
 	if [[ "${MULTIPLE_TARGET}" = 'true' ]]
 	then
 		for i in $(cat "${TARGET_LIST}")
